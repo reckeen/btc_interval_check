@@ -7,6 +7,8 @@
 Assuming that the block creation rate is 10 minutes on average, and also assuming that the network instantly agrees on blocks, the distribution I would use to model this is the exponential distribution. Per wikipedia "exponential distribution is the probability distribution of the time between events in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate".  
 
 When I graph the exponential distribution vs. the real data, sorted by elapsed block creation time, the graphs agree quite well except for some outliers.
+![Histogram Comparison - Log ScaleImage](./btc_expn_dist_hist_comp_log.png?raw=true)
+
 
 For 50 runs of the simulation, I get an average of 4.68 block creation gaps of more than 2 hours.
 Avg. 2+ hour gaps:4.68
