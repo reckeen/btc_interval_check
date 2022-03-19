@@ -2,7 +2,7 @@
 
 ## This project is an attempt to answer the following questions:
 
-- How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart from each other? We'd like to know your answer (it doesn't have to be precise) and your approach towards this solution using probability and statistics.
+### How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart from each other? We'd like to know your answer (it doesn't have to be precise) and your approach towards this solution using probability and statistics.
 
 Assuming that the block creation rate is 10 minutes on average, and also assuming that the network instantly agrees on blocks, the distribution I would use to model this is the exponential distribution. Per wikipedia "exponential distribution is the probability distribution of the time between events in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate".  
 
@@ -19,7 +19,7 @@ _This simulation doesn't account for the network having machines with different 
 
 
 
-- How many times has the above happened so far in the history of Bitcoin?
+### How many times has the above happened so far in the history of Bitcoin?
 
 In order to answer the second question, I thought I would try to find out what public data was available about bitcoin.  There are a number of rest apis that provide info about blocks and their solve time.  If I had approx 300GB available, I suppose I could have downloaded the blockchain data itself.
 
