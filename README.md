@@ -6,7 +6,7 @@
 
 Assuming that the block creation rate is 10 minutes on average, and also assuming that the network instantly agrees on blocks, the distribution I would use to model this is the exponential distribution. Per wikipedia "exponential distribution is the probability distribution of the time between events in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate".  
 
-In btc_interval_simulation.py, I used np.random.default_rng().exponential() to generate random values using the exponetial distribution.
+In btc_interval_simulation.py, I used np.random.default_rng().exponential() to generate random values using the exponential distribution.
 
 When I graph the exponential distribution vs. the real data, sorted by elapsed block creation time, the graphs agree quite well except for some outliers.
 ![Histogram Comparison - Log ScaleImage](./btc_expn_dist_hist_comp_log.png?raw=true)

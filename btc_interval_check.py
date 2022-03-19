@@ -9,6 +9,7 @@ import backoff
 import pandas as pd
 import numpy as np
 import matplotlib
+
 matplotlib.use("Agg")
 
 
@@ -94,18 +95,27 @@ if __name__ == "__main__":
     fig = df.loc[:, "interval"].hist(bins=50).get_figure()
     fig.savefig("btc_block_intervals_hist.png")
 
-    df_2hr = df.loc[df["interval"] > 120 ]
+    df_2hr = df.loc[df["interval"] > 120]
     df_2hr.to_csv("btc_2hr_gaps.csv")
 
     print(len(df.query("interval < 0")))
-    figb = df.loc[:, "interval"].plot(kind='hist', bins=50, logy=True).get_figure()
+    figb = df.loc[:, "interval"].plot(kind="hist", bins=50, logy=True).get_figure()
     figb.savefig("btc_block_intervals_log_hist.png")
 
     df_2hr = pd.read_csv("btc_2hr_gaps.csv")
-    print(f"Number of blocks that were solved more than 2 hours after the previous:{len(df_2hr)}")
-    fig2 = df_2hr.sort_values("interval", ascending=False).head(10).plot(x="height", y="interval",kind="bar", xlabel="block_height", ylabel="time(hrs)").get_figure()
+    print(
+        f"Number of blocks that were solved more than 2 hours after the previous:{len(df_2hr)}"
+    )
+    fig2 = (
+        df_2hr.sort_values("interval", ascending=False)
+        .head(10)
+        .plot(
+            x="height",
+            y="interval",
+            kind="bar",
+            xlabel="block_height",
+            ylabel="time(hrs)",
+        )
+        .get_figure()
+    )
     fig2.savefig("btc_2hr_gaps.png")
-    
-
-
-

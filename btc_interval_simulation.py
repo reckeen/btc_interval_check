@@ -5,6 +5,7 @@ import time
 import pandas as pd
 import numpy as np
 import matplotlib
+
 matplotlib.use("Agg")
 
 
@@ -16,11 +17,13 @@ if __name__ == "__main__":
     num_sim = 50
     for i in range(num_sim):
         df_sim = pd.DataFrame(
-                {
-                    "height":range(1, block_height + 1),
-                    "time_est":np.random.default_rng().exponential(scale=10, size=block_height)
-                    },
-                ).set_index("height")
+            {
+                "height": range(1, block_height + 1),
+                "time_est": np.random.default_rng().exponential(
+                    scale=10, size=block_height
+                ),
+            }
+        ).set_index("height")
         num_gaps_2hr = len(df_sim.query("time_est > 120"))
 
         gaps_2hr.append(num_gaps_2hr)
@@ -31,14 +34,17 @@ if __name__ == "__main__":
     print(f"Chance: 1:{block_height/avg:0.0f}")
     print(f"Pct: {100*avg/block_height:0.8f}%")
 
-
     df = pd.concat([df_actual, df_sim], axis=1)
     print(df.describe())
-    figa = df.loc[:, ["time_est", "interval"]].plot(kind='hist',bins=50, alpha=0.5).get_figure()
+    figa = (
+        df.loc[:, ["time_est", "interval"]]
+        .plot(kind="hist", bins=50, alpha=0.5)
+        .get_figure()
+    )
     figa.savefig("btc_expn_dist_hist_comp.png")
-    figb = df.loc[:, ["time_est", "interval"]].plot(kind='hist',bins=50, logy=True, alpha=0.5).get_figure()
+    figb = (
+        df.loc[:, ["time_est", "interval"]]
+        .plot(kind="hist", bins=50, logy=True, alpha=0.5)
+        .get_figure()
+    )
     figb.savefig("btc_expn_dist_hist_comp_log.png")
-    
-
-
-
