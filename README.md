@@ -3,13 +3,27 @@
 - This project is an attempt to answer the following questions:
 
 1. How often does the Bitcoin network see two consecutive blocks mined more than 2 hours apart from each other? We'd like to know your answer (it doesn't have to be precise) and your approach towards this solution using probability and statistics.
-1. How many times has the above happened so far in the history of Bitcoin?
 
-The first question is a bit tough to answer.  From what I've read the difficulty level of solving a block is adjusted in order to keep the solve time of a block around 10 minutes.  Given the changing # of miners, and my lack of knowledge of the algorithm, I'm having difficulty coming up with an approach that seems reasonable.  This lead me to focus on the second question.
+Assuming that the block creation rate is 10 minutes on average, and also assuming that the network instantly agrees on blocks, the distribution I would use to model this is the exponential distribution. Per wikipedia "exponential distribution is the probability distribution of the time between events in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate".  
+
+When I graph the exponential distribution vs. the real data, sorted by elapsed block creation time, the graphs agree quite well except for some outliers.
+
+For 50 runs of the simulation, I get an average of 4.68 block creation gaps of more than 2 hours.
+Avg. 2+ hour gaps:4.68
+Chance: 1:155277
+Pct: 0.00064401%
+
+This simulation doesn't account for the network having machines with different local system times.
+
+
+
+1. How many times has the above happened so far in the history of Bitcoin?
 
 In order to answer the second question, I thought I would try to find out what public data was available about bitcoin.  There are a number of rest apis that provide info about blocks and their solve time.  If I had approx 300GB available, I suppose I could have downloaded the blockchain data itself.
 
 So I set about seeing if I could get the data from the API available at blockstream.info.
 
 I was able to extract the heigh, hash, and timestamp of the blocks, so I wrote a python script to do this.
-I found that there have been 151 times that consecutive blocks were solved more than 2 hours apart.
+I found that there have been 151 times that consecutive blocks were created more than 2 hours apart.
+
+I think the discrepancy here between the 151 times vs. the 4.68 times expected from the simulation is due to the variation of system times in the network.

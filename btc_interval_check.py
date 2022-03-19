@@ -90,16 +90,21 @@ if __name__ == "__main__":
     df = pd.read_csv("btc_times.csv").set_index("height").sort_index()
 
     # calculate elapsed time since previous block, in hours
-    df["interval"] = df["block_time"].diff().div(3600)
+    df["interval"] = df["block_time"].diff().div(60)
     fig = df.loc[:, "interval"].hist(bins=50).get_figure()
-    fig.savefig("btc_all_block_intervals_hist.png")
-    df_2hr = df.loc[df["interval"] > 2 ]
+    fig.savefig("btc_block_intervals_hist.png")
+
+    df_2hr = df.loc[df["interval"] > 120 ]
     df_2hr.to_csv("btc_2hr_gaps.csv")
+
+    print(len(df.query("interval < 0")))
+    figb = df.loc[:, "interval"].plot(kind='hist', bins=50, logy=True).get_figure()
+    figb.savefig("btc_block_intervals_log_hist.png")
 
     df_2hr = pd.read_csv("btc_2hr_gaps.csv")
     print(f"Number of blocks that were solved more than 2 hours after the previous:{len(df_2hr)}")
     fig2 = df_2hr.sort_values("interval", ascending=False).head(10).plot(x="height", y="interval",kind="bar", xlabel="block_height", ylabel="time(hrs)").get_figure()
-    fig2.savefig("btc_block_big_gaps.png")
+    fig2.savefig("btc_2hr_gaps.png")
     
 
 
