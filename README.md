@@ -32,3 +32,8 @@ I was able to extract the heigh, hash, and timestamp of the blocks, so I wrote a
 I found that there have been 151 times that consecutive blocks were created more than 2 hours apart.
 
 I think the discrepancy here between the 151 times vs. the 4.68 times expected from the simulation is due to the variation of system times in the network.
+
+
+## About the project
+
+### This project/repo is meant to be used with poetry [https://python-poetry.org/] for dependency management.
